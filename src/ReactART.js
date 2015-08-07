@@ -11,10 +11,8 @@
 
 "use strict";
 
-require('art/modes/fast'); // Flip this to DOM mode for debugging
-
 var Transform = require('art/core/transform');
-var Mode = require('art/modes/current');
+var Mode; // Defined later
 
 var React = require('react');
 var ReactInstanceMap = require('react/lib/ReactInstanceMap');
@@ -597,19 +595,21 @@ Pattern.prototype.applyFill = function(node) {
   node.fillImage.apply(node, this.args);
 };
 
-var ReactART = {
-
-  LinearGradient: LinearGradient,
-  RadialGradient: RadialGradient,
-  Pattern: Pattern,
-  Transform: Transform,
-  Path: Mode.Path,
-  Surface: Surface,
-  Group: Group,
-  ClippingRectangle: ClippingRectangle,
-  Shape: Shape,
-  Text: Text
-
+var ReactART = function ReactART(mode) {
+  require('art/modes/' + (mode || 'fast'));
+  Mode = require('art/modes/current');
+  return assign(ReactART, {
+    LinearGradient: LinearGradient,
+    RadialGradient: RadialGradient,
+    Pattern: Pattern,
+    Transform: Transform,
+    Path: Mode.Path,
+    Surface: Surface,
+    Group: Group,
+    ClippingRectangle: ClippingRectangle,
+    Shape: Shape,
+    Text: Text
+  });
 };
 
 module.exports = ReactART;
