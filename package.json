@@ -15,7 +15,7 @@
   "main": "lib/ReactART.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/reactjs/react-art.git"
+    "url": "https://github.com/mpierre/react-art.git#selectableMode"
   },
   "dependencies": {
     "art": "^0.10.0"
